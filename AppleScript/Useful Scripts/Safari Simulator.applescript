@@ -6,7 +6,7 @@ tell application "System Events"
 			tell menu "Develop"
 				tell menu item "Simulator"
 					tell menu 1
-						#this will fail - use your own menu item text i quotes below
+						#this will fail - use your own menu item text in quotes below
 						click menu item "index.html"
 					end tell
 				end tell
