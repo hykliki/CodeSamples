@@ -1,0 +1,27 @@
+<p>multiple-contents works!</p>
+<span #contentRef><ng-content></ng-content></span>
+<div>
+    Content repeat1 :
+    <span innerHtml="{{contentRef.innerHTML}}"></span>
+</div>
+
+<div>
+    Content repeat2 :
+    <span innerHtml="{{contentRef.innerHTML}}"></span>
+</div>
+
+
+
+<!-- <h1>Template approach only alows one contnet to be populated</h1>
+<div>
+    Content repeat1 :
+    <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+</div>
+
+<div>
+    Content repeat2 :
+    <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+</div>
+
+<ng-template #contentTpl><ng-content></ng-content></ng-template> -->
+
