@@ -4,3 +4,6 @@
 <button id="reset" (click)="reset()">Reset</button>
 
 <div> Current count: {{ count$ | async}} </div>
+<div>Ref data: {{(refData$|async).refData}}</div>
+
+<div>String data: {{stringData$|async}}</div>
