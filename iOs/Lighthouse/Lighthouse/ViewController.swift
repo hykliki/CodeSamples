@@ -12,7 +12,15 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate {
 
     var chequeAmount: TNGAmountInput!
-    var accountSelection: TNGSelect!
+    var accountSelection: TNGAccountPick!
+
+    let account1: Account = Account(id: "123", number: "1919188273", nickname: "My Chequing Account", description: "Chequing Account", balance: 78920.84, type: AccountType.chequing, code: "CHQ", currency: CurrencyType.CAD)
+    let account2: Account = Account(id: "124", number: "1919188281", nickname: "My Joint Account", description: "Joint Chequing Account", balance: 8876.73, type: AccountType.chequing, code: "CHQ", currency: CurrencyType.CAD)
+    let account3: Account = Account(id: "126", number: "1919188289", nickname: "My Savigns Account", description: "Svings Account", balance: 672621.89, type: AccountType.chequing, code: "SAV", currency: CurrencyType.CAD)
+
+    var accountList: [Account] = [] //todo ds: this should be observable
+    var selectedAccount: Account? //todo ds: this should be observable
+
 
 
     @IBOutlet weak var amountInputContainer: UIView!
@@ -30,11 +38,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             make.edges.equalToSuperview()
         }
 
-        accountSelection = TNGSelect()
+        accountSelection = TNGAccountPick()
         accountSelection.required = true
 
+        buildAccountsArray()
         accountSelection.label = "To"
         accountSelection.placeHolder = "Select Account"
+        accountSelection.accountList = accountList
+        //accountSelection.selectedAccount
 
         self.accountSelectContainer.addSubview(accountSelection)
         self.accountSelectContainer.backgroundColor = .clear
@@ -63,7 +74,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func buttonAction(_ sender: Any) {
 //        presentSelection()
+        buildAccountsArray()
     }
+
+
+
+    //todo ds: debug remove this funciton
+    func buildAccountsArray() {
+        accountList.append(account1)
+        accountList.append(account2)
+        accountList.append(account3)
+    }
+
+
 
 
 

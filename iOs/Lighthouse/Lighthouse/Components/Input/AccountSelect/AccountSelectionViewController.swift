@@ -9,23 +9,15 @@
 import UIKit
 
 class AccountSelectionViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
+    public var selectedAccount: Account?
+    public var accountList: [Account] = []
+    public var inputField: TNGAccountPick? // todo ds: make abstract // this is input field intiating // can there be a better name?
 
-
-
-    let account1: Account = Account(id: "123", number: "1919188273", nickname: "My Chequing Account", description: "Chequing Account", balance: 78920.84, type: AccountType.chequing, code: "CHQ", currency: CurrencyType.CAD)
-    let account2: Account = Account(id: "124", number: "1919188281", nickname: "My Joint Account", description: "Joint Chequing Account", balance: 8876.73, type: AccountType.chequing, code: "CHQ", currency: CurrencyType.CAD)
-    let account3: Account = Account(id: "126", number: "1919188289", nickname: "My Savigns Account", description: "Svings Account", balance: 672621.89, type: AccountType.chequing, code: "SAV", currency: CurrencyType.CAD)
-
-    var items: [Account] = []
-
-    func buildAccountsArray() {
-        items.append(account1)
-        items.append(account2)
-        items.append(account3)
-    }
+    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var listTableView: UITableView!
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return accountList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,7 +33,7 @@ class AccountSelectionViewController: UIViewController,  UITableViewDataSource, 
         let mc = cell as! TNGAccountViewCell
 
 
-        if let decValue = items[indexPath.row].balance {
+        if let decValue = accountList[indexPath.row].balance {
             let currencyFormatter = NumberFormatter()
 
             currencyFormatter.numberStyle = .currency
@@ -50,7 +42,13 @@ class AccountSelectionViewController: UIViewController,  UITableViewDataSource, 
             mc.accountItem.accountBalanceLabel.text = balance
         }
 
-        mc.accountItem.accountNameLabel.text = items[indexPath.row].nickname
+        if selectedAccount?.id == accountList[indexPath.row].id {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        mc.accountItem.accountNameLabel.text = accountList[indexPath.row].nickname
+        cell.tintColor = UIColor.red // todo ds: set proper color!
 
         return cell
     }
@@ -60,19 +58,30 @@ class AccountSelectionViewController: UIViewController,  UITableViewDataSource, 
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let index: Int? = accountList.firstIndex(where: { self.selectedAccount?.id == $0.id })
+
+        if let row = index {
+
+            let oldIndexPath: IndexPath = IndexPath(row: row, section: 0)
+            self.listTableView.deselectRow(at: oldIndexPath, animated: true)
+            self.listTableView.cellForRow(at: oldIndexPath)?.accessoryType = .none
+        }
+
+        let selectedCell: UITableViewCell = listTableView.cellForRow(at: indexPath)!
+        selectedCell.accessoryType = .checkmark
+
+        selectedAccount = accountList[indexPath.row]
+        if let parentInput = self.inputField {
+            parentInput.selectedAccount = selectedAccount
+        }
         self.parent?.dismiss(animated: true, completion: nil)
     }
 
-    
-
-
-    @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var listTableView: UITableView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        buildAccountsArray()
-        headerLabel.text = "To Account"
+
+        headerLabel.text = "To Account" // todo ds: proper text
         listTableView.delegate = self
         listTableView.dataSource = self
 

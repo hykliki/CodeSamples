@@ -20,6 +20,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     </view>
                 </subviews>
+                <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="mSd-cO-5MK" secondAttribute="bottom" id="5Rn-2p-9vt"/>
                     <constraint firstItem="mSd-cO-5MK" firstAttribute="leading" secondItem="Mox-a3-472" secondAttribute="leading" id="7Ak-jI-Veh"/>

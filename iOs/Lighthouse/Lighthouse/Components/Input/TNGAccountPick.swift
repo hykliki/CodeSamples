@@ -16,10 +16,26 @@ import MaterialComponents.MaterialBottomSheet
 import MaterialComponents.MaterialShapeScheme
 
 
-class TNGSelect: TNGTextInput {
+class TNGAccountPick: TNGTextInput {
+
+
+    var accountList: [Account] = [] //todo ds: this should be observable
+    var _selectedAccount: Account?
+    var selectedAccount: Account? {
+        //todo ds: this should be observable
+        set {
+            self._selectedAccount = newValue
+            self.textFieldInput.text = newValue?.nickname
+        }
+        get {
+            return _selectedAccount
+        }
+    }
+
 
 
     override func setupRx() {
+
         super.setupRx()
         let tapGesture = UITapGestureRecognizer()
         addGestureRecognizer(tapGesture)
@@ -38,7 +54,10 @@ class TNGSelect: TNGTextInput {
     }
 
     func presentSelection() {
-        let viewController: UIViewController = AccountSelectionViewController()
+        let viewController: AccountSelectionViewController = AccountSelectionViewController()
+        viewController.accountList = accountList
+        viewController.selectedAccount = selectedAccount
+        viewController.inputField = self
         //viewController.view.roundCorners([.topLeft, .topRight], radius: 15)
 
         let bottomSheet: MDCBottomSheetController = MDCBottomSheetController(contentViewController: viewController)
@@ -46,7 +65,6 @@ class TNGSelect: TNGTextInput {
         bottomSheet.setShapeGenerator(shapeGenerator, for: .preferred)
         bottomSheet.setShapeGenerator(shapeGenerator, for: .extended)
         bottomSheet.setShapeGenerator(shapeGenerator, for: .closed)
-        bottomSheet.title = "MyTitle"
 
 
 
@@ -56,6 +74,7 @@ class TNGSelect: TNGTextInput {
         if let pvc = parentViewController {
             pvc.present(bottomSheet, animated: true, completion: nil)
         }
+        
 
 
     }

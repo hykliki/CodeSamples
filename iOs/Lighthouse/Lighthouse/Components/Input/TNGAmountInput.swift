@@ -109,7 +109,7 @@ class TNGAmountInput: TNGTextInput {
     private func stripCurrencyFormattingSymbols(amountText: String, nf: NumberFormatter) -> String {
         let textValue = amountText.replacingOccurrences(of: nf.groupingSeparator, with: "")
             .replacingOccurrences(of: nf.currencySymbol, with: "")
-            .replacingOccurrences(of: nf.decimalSeparator, with: "")
+            .replacingOccurrences(of: nf.decimalSeparator, with: ".")
             .trimmingCharacters(in: .whitespaces)
         return textValue
     }
