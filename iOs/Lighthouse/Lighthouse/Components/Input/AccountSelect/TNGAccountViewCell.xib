@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TNGAccountViewCell" customModule="Lighthouse" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="70" id="OSo-PZ-GFk" customClass="TNGAccountViewCell" customModule="Lighthouse" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OSo-PZ-GFk" id="Mox-a3-472">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="mSd-cO-5MK" customClass="TNGAccountItem" customModule="Lighthouse" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="334" height="80"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="mSd-cO-5MK" secondAttribute="bottom" id="5Rn-2p-9vt"/>
+                    <constraint firstItem="mSd-cO-5MK" firstAttribute="leading" secondItem="Mox-a3-472" secondAttribute="leading" id="7Ak-jI-Veh"/>
+                    <constraint firstItem="mSd-cO-5MK" firstAttribute="top" secondItem="Mox-a3-472" secondAttribute="top" id="8h1-fc-jjP"/>
+                    <constraint firstAttribute="trailing" secondItem="mSd-cO-5MK" secondAttribute="trailing" constant="80" id="Dv2-Uk-Fdc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="accountItem" destination="mSd-cO-5MK" id="ygd-Yu-6K2"/>
+            </connections>
+            <point key="canvasLocation" x="47.826086956521742" y="118.52678571428571"/>
+        </tableViewCell>
+    </objects>
+</document>
