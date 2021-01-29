@@ -19,11 +19,13 @@ class TNGAccountPick: TNGTextInput {
 
     var accountList: [Account] = [] //todo ds: this should be observable
     var _selectedAccount: Account?
+    var accountSubject: BehaviorSubject<Account?> = .init(value: nil)
     var selectedAccount: Account? {
         //todo ds: this should be observable
         set {
             self._selectedAccount = newValue
-            self.textFieldInput.text = newValue?.nickname
+            self.textFieldInput.text = newValue?.nickname ?? newValue?.description
+            self.accountSubject.onNext(newValue)
         }
         get {
             return _selectedAccount
@@ -33,12 +35,20 @@ class TNGAccountPick: TNGTextInput {
     override func setupRx() {
 
         super.setupRx()
+        self.textFieldInput.isUserInteractionEnabled = false
         let tapGesture = UITapGestureRecognizer()
         addGestureRecognizer(tapGesture)
 
         tapGesture.rx.event.bind(onNext: { recognizer in
             self.presentSelection()
-            print("touches: \(recognizer.numberOfTouches)")
+            // todo ds: these 2 lines - attempt to deal with problem when amount input field is selected then bottom sheet is activated
+            // when bottom sheet is then dismissed focus returns back to amount input field and keyboard pops up - we don't want it to
+            // happen. 1st line atlest triggers end editin, and formattting for display takes palce, but focus still returns back
+            // to amount field
+            self.parentViewController?.view.endEditing(true)
+            self.parentViewController?.view.resignFirstResponder()
+
+            // print("touches: \(recognizer.numberOfTouches)") todo ds: this is not needed remove
         }).disposed(by: disposeBag)
     }
 

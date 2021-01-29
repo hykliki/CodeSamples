@@ -30,24 +30,23 @@ class AccountSelectionViewController: UIViewController,  UITableViewDataSource, 
 
          }
 
-        let mc = cell as! TNGAccountViewCell
+        if let mc = cell as? TNGAccountViewCell {
+            if let decValue = accountList[indexPath.row].balance {
+                let currencyFormatter = NumberFormatter()
 
+                currencyFormatter.numberStyle = .currency
 
-        if let decValue = accountList[indexPath.row].balance {
-            let currencyFormatter = NumberFormatter()
+                let balance = currencyFormatter.string(from: NSDecimalNumber.init(decimal: decValue))
+                mc.accountItem.accountBalanceLabel.text = balance
+            }
 
-            currencyFormatter.numberStyle = .currency
-
-            let balance = currencyFormatter.string(from: NSDecimalNumber.init(decimal: decValue))
-            mc.accountItem.accountBalanceLabel.text = balance
+            if selectedAccount?.id == accountList[indexPath.row].id {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
+            mc.accountItem.accountNameLabel.text = accountList[indexPath.row].nickname ?? accountList[indexPath.row].description
         }
-
-        if selectedAccount?.id == accountList[indexPath.row].id {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-        mc.accountItem.accountNameLabel.text = accountList[indexPath.row].nickname
         cell.tintColor = UIColor.red // todo ds: set proper color!
 
         return cell
@@ -76,6 +75,7 @@ class AccountSelectionViewController: UIViewController,  UITableViewDataSource, 
             parentInput.selectedAccount = selectedAccount
         }
         self.parent?.dismiss(animated: true, completion: nil)
+        
     }
 
     override func viewDidLoad() {
