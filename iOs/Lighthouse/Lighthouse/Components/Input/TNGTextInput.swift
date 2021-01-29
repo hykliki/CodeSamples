@@ -12,7 +12,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-
 class TNGTextInput: CustomViewFromXib, UITextFieldDelegate {
 
     var errorRequiredMsg = "global.validation.required"
@@ -202,7 +201,6 @@ class TNGTextInput: CustomViewFromXib, UITextFieldDelegate {
                 return true
             }
 
-
             if !isEnabled {
                 return true
             }
@@ -250,4 +248,3 @@ class TNGTextInput: CustomViewFromXib, UITextFieldDelegate {
         }
     }
 }
-

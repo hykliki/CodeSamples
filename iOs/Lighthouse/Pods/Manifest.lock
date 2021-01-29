@@ -1,0 +1,58 @@
+PODS:
+  - MaterialComponents/BottomSheet (101.1.1):
+    - MaterialComponents/Elevation
+    - MaterialComponents/private/KeyboardWatcher
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/Elevation (101.1.1):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (101.1.1)
+  - MaterialComponents/private/Color (101.1.1)
+  - MaterialComponents/private/KeyboardWatcher (101.1.1):
+    - MaterialComponents/private/Application
+  - MaterialComponents/private/Math (101.1.1)
+  - MaterialComponents/schemes/Shape (101.1.1):
+    - MaterialComponents/ShapeLibrary
+    - MaterialComponents/Shapes
+  - MaterialComponents/ShadowElevations (101.1.1)
+  - MaterialComponents/ShadowLayer (101.1.1):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/ShapeLibrary (101.1.1):
+    - MaterialComponents/private/Math
+    - MaterialComponents/Shapes
+  - MaterialComponents/Shapes (101.1.1):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - RxCocoa (4.3.1):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.3.1)
+  - SnapKit (5.0.1)
+
+DEPENDENCIES:
+  - MaterialComponents/BottomSheet (= 101.1.1)
+  - MaterialComponents/schemes/Shape (= 101.1.1)
+  - RxCocoa (= 4.3.1)
+  - RxSwift (= 4.3.1)
+  - SnapKit (= 5.0.1)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MaterialComponents
+    - RxCocoa
+    - RxSwift
+    - SnapKit
+
+SPEC CHECKSUMS:
+  MaterialComponents: ee54e69c0956bd6e341933eee6f34dc6df08ee7a
+  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+
+PODFILE CHECKSUM: 1c15adf37e26c16e9d572f8649e493746697f332
+
+COCOAPODS: 1.5.2

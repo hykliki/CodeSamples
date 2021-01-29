@@ -11,7 +11,7 @@ import UIKit
 
 @IBDesignable
 class TNGAccountItem: CustomViewFromXib {
-    
+
     @IBOutlet weak var accountNameLabel: UILabel!
     @IBOutlet weak var accountBalanceLabel: UILabel!
 
@@ -19,5 +19,5 @@ class TNGAccountItem: CustomViewFromXib {
         super.commonInit()
         self.backgroundColor = .clear
     }
-    
+
 }

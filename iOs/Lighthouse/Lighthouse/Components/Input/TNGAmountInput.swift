@@ -14,33 +14,33 @@ import RxCocoa
 
 @IBDesignable
 class TNGAmountInput: TNGTextInput {
-    
+
     var errorAmountMin = "rdc.error.amount.min"
     var errorAmountMax = "rdc.error.amount.max"
-    
+
     var amount: BehaviorSubject<Decimal?> = .init(value: nil)
-    
+
     let AMOUNT_PATTERN = "^\\d*((\\.|,)\\d{0,2})?$"
     let MAX_AMOUNT: Decimal = NSNumber(999999999.99).decimalValue
-    
+
     var minAmount: Decimal = NSNumber(0.01).decimalValue
     var maxAmount: Decimal = NSNumber(999999999.99).decimalValue
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initUI()
     }
-    
+
     private func initUI() {
         self.textFieldInput.keyboardType = .decimalPad
         self.textFieldInput.placeholder = self.formatAmountValue(amount: 0, forEdit: false)
     }
-    
+
     override func setupRx() {
         super.setupRx()
         self.value
@@ -50,7 +50,7 @@ class TNGAmountInput: TNGTextInput {
         })
         .disposed(by: disposeBag)
     }
-    
+
     private func formatAmount(forEdit: Bool) -> String? {
         if let val = self.amountValue() {
             return formatAmountValue(amount: val, forEdit: forEdit)
@@ -64,39 +64,39 @@ class TNGAmountInput: TNGTextInput {
         }
         return nil
     }
-    
+
     private func formatAmountValue(amount: NSNumber, forEdit: Bool) -> String? {
         // todo ds: see if UIUtils can be used for currency formatting
-        
+
         let currencyFormatter = NumberFormatter()
-        
+
         currencyFormatter.numberStyle = .currency
-        
+
         if forEdit {
             currencyFormatter.usesGroupingSeparator = false
             currencyFormatter.currencySymbol = ""
         }
-        
+
         if let formattedValue = currencyFormatter.string(from: amount) {
             return formattedValue.trimmingCharacters(in: .whitespaces)
         }
         return nil
     }
-    
+
     private func stringToDecimal(decimalString: String, defaultValue: Decimal) -> Decimal {
         if let result = Decimal(string: decimalString) {
             return result
         }
         return defaultValue
     }
-    
+
     private func parseAmountFromText(amountText: String) -> NSNumber? {
         let currencyFormatter = NumberFormatter()
-        
+
         if let amount = Decimal(string: self.stripCurrencyFormattingSymbols(amountText: amountText, nf: currencyFormatter)) {
             return NSDecimalNumber.init(decimal: amount)
         }
-        
+
         // It will probably never reach this code since formatting symbols are stripped
         // above before converting to decimal so it should always convert successfully
         currencyFormatter.numberStyle = .currency
@@ -105,7 +105,7 @@ class TNGAmountInput: TNGTextInput {
         }
         return nil
     }
-    
+
     private func stripCurrencyFormattingSymbols(amountText: String, nf: NumberFormatter) -> String {
         let textValue = amountText.replacingOccurrences(of: nf.groupingSeparator, with: "")
             .replacingOccurrences(of: nf.currencySymbol, with: "")

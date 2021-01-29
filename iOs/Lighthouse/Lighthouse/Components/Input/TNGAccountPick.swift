@@ -15,9 +15,7 @@ import RxSwift
 import MaterialComponents.MaterialBottomSheet
 import MaterialComponents.MaterialShapeScheme
 
-
 class TNGAccountPick: TNGTextInput {
-
 
     var accountList: [Account] = [] //todo ds: this should be observable
     var _selectedAccount: Account?
@@ -32,8 +30,6 @@ class TNGAccountPick: TNGTextInput {
         }
     }
 
-
-
     override func setupRx() {
 
         super.setupRx()
@@ -45,6 +41,7 @@ class TNGAccountPick: TNGTextInput {
             print("touches: \(recognizer.numberOfTouches)")
         }).disposed(by: disposeBag)
     }
+
     override func getNibName() -> String {
         return "TNGTextInput"
     }
@@ -65,18 +62,9 @@ class TNGAccountPick: TNGTextInput {
         bottomSheet.setShapeGenerator(shapeGenerator, for: .preferred)
         bottomSheet.setShapeGenerator(shapeGenerator, for: .extended)
         bottomSheet.setShapeGenerator(shapeGenerator, for: .closed)
-
-
-
-
-        //bottomSheet.contentViewController.roundCorners([.topLeft, .topRight], radius: 15)
-
         if let pvc = parentViewController {
             pvc.present(bottomSheet, animated: true, completion: nil)
         }
-        
-
-
     }
 
     func roundCorners() -> MDCShapeGenerating {
@@ -84,7 +72,6 @@ class TNGAccountPick: TNGTextInput {
         let cornerTreatment = MDCRoundedCornerTreatment(radius: 15)
         shapeGenerator.topLeftCorner = cornerTreatment
         shapeGenerator.topRightCorner = cornerTreatment
-
         return shapeGenerator
     }
 
